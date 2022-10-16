@@ -38,7 +38,7 @@ def user_input_features():
     user_long = loc.longitude
 
     # The rest of the user input
-    property_input = st.sidebar.selectbox('Select the property type', ('Apartment', 'Condominium', 'Home','House','Hostel','Hotel','Others'))
+    property_input = st.sidebar.selectbox('Select the property type', ('Apartment', 'Hotel', 'House'))
     room_input = st.sidebar.selectbox('Select the room type', ('Entire home/apt', 'Private room', 'Shared room','Hotel room'))
     accommodates_input = st.sidebar.number_input('Select the number of guests', 1, 16, 1)
     bedrooms_input = st.sidebar.number_input('Select the number of bedrooms', 1, 5, 1)
@@ -61,7 +61,6 @@ def user_input_features():
     return features
 
 input_df = user_input_features()
-
 
 # Create prediction button
 btn = st.sidebar.button("Get estimated listing price")
@@ -96,7 +95,7 @@ This app aims to help homeowners to set a price for their property based on the 
 st.write('---')
 
 # Load the original Airbnb listings data
-@st.cache
+
 def load_data():
     listings_modelling = pd.read_csv('./data/listings_user_inputs.csv')
     return listings_modelling
@@ -146,9 +145,6 @@ user_input = df_final[:1]
 # Load in model
 model = pickle.load(open('./models/final_xgb.pkl', 'rb'))
 
-
-
-
 #Display listing location on map
 st.subheader('Location of your listing')
 userCoord = user_input[["latitude", "longitude"]]
@@ -157,14 +153,11 @@ st.map(userCoord)
 
 st.write('---')
 
-
-
 # Apply model to make predictions
 prediction = model.predict(user_input)
 # As the model is trained on log(price), we need to convert the prediction back to price
 prediction = np.exp(prediction)
 prediction = '$ {:,.2f}'.format(float(prediction))
-
 
 # Display the predicted price
 st.header('Predicted Listing Price')
