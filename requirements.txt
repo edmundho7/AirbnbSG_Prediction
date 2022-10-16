@@ -1,6 +1,7 @@
 cloudpickle==2.2.0
 geographiclib==1.52
 geopy==2.2.0
+matplotlib==3.6.1
 munch==2.5.0
 numpy==1.23.3
 pandas==1.5.0
