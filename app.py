@@ -40,7 +40,6 @@ def user_input_features():
     # The rest of the user input
     property_input = st.sidebar.selectbox('Select the property type', ('Apartment', 'Hotel', 'House'))
     room_input = st.sidebar.selectbox('Select the room type', ('Entire home/apt', 'Private room', 'Shared room','Hotel room'))
-    accommodates_input = st.sidebar.number_input('Select the number of guests', 1, 16, 1)
     bedrooms_input = st.sidebar.number_input('Select the number of bedrooms', 1, 5, 1)
     beds_input = st.sidebar.number_input('Select the number of beds', 1,50, 1)
     bathroom_input = st.sidebar.number_input('Select the number of bathrooms', 1, 20, 1)
@@ -50,7 +49,6 @@ def user_input_features():
             'longitude': user_long,
             'property_type': property_input,
             'room_type': room_input,
-            'accommodates': accommodates_input,
             'bedrooms': bedrooms_input,
             'beds': beds_input,
             'bathroom_qty': bathroom_input,
@@ -142,6 +140,12 @@ df_final = pd.get_dummies(df_final, columns=encode)
 # Get the user input data
 user_input = df_final[:1]
 
+# Scale numeric variables
+# numeric = ['latitude','longitude', 'bedrooms', 'beds', 'bathroom_qty', 'mrtDisp', 'cityDisp']
+# scaler = StandardScaler()
+# scaler.fit(user_input[numeric])
+
+  
 # Load in model
 model = pickle.load(open('./models/final_xgb.pkl', 'rb'))
 
@@ -174,7 +178,7 @@ explainer = shap.Explainer(model)
 shap_values = explainer(user_input)
 
 st.subheader('Explanation of the model prediction using SHAP values')
-st.caption('Which features have the biggest impact on the price of a     listing?')
+st.caption('Which features have the biggest impact on the price of a listing?')
 plt.title('Feature importance based on SHAP values (Top 10 features')
 fig = plt.figure()
 plot1 = shap.summary_plot(shap_values, user_input, plot_type="bar",show=False, max_display=10)
@@ -183,6 +187,8 @@ plot1 = shap.summary_plot(shap_values, user_input, plot_type="bar",show=False, m
 plt.rcParams.update({'font.size': 8})
 plt.gcf().set_size_inches(6, 3)
 st.pyplot(plot1, bbox_inches='tight')
+# Set x-axis label
+plt.xlabel('SHAP value (impact on model output)')
 st.write('---')
 
 # # Plot a waterfall chart
