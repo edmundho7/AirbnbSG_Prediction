@@ -90,6 +90,10 @@ This is especially true for new hosts who are unsure of the market price for the
 This app aims to help homeowners to set a price for their property based on the features of their property and also provide insights on the factors that affect the price of their property.
 ''')
 
+with st.expander("How to use this application"):
+    st.markdown("""Input the features of your Airbnb on the *left sidebar* to have the model predict the price of your listing (shown below the map). 
+    If a particular feature is not known, just estimate or leave it as default. Feel free to play around with the values to see the range of prices.
+""")
 st.write('---')
 
 # Load the original Airbnb listings data
@@ -178,22 +182,28 @@ explainer = shap.Explainer(model)
 shap_values = explainer(user_input)
 
 st.subheader('Explanation of the model prediction using SHAP values')
-st.caption('Which features have the biggest impact on the price of a listing?')
-plt.title('Feature importance based on SHAP values (Top 10 features')
-fig = plt.figure()
-plot1 = shap.summary_plot(shap_values, user_input, plot_type="bar",show=False, max_display=10)
-# Set size of the plot
+st.write('Which features have the biggest impact on the price of a listing?')
+
+with st.expander("See explanation for understanding SHAP values"):
+    st.write("""
+             """)
+    st.markdown("""
+
+**E[f(x)]**: is the output value of the model's prediction for the given input.
+
+ **f(x)**: is the base value for the given input. It is the price that will be predicted if we did not know any features for the current output.
+**Red bars**: Features that push the listing price ***higher***
+
+**Blue bars**: Features that pull the listing price ***lower***
+
+**Width of bars**: Importance of the feature. The wider it is, the higher impact is has on the price
+
+**Values**: The logarithmn value of the feature. To get how much the feature affect the price of the listing in $, take the exponential of the value
+""")
+
+# Plot a waterfall chart
+plot1 = shap.plots.waterfall(shap_values[0])
+plt.gcf().set_size_inches(6, 3)
 # Set font size
 plt.rcParams.update({'font.size': 8})
-plt.gcf().set_size_inches(6, 3)
 st.pyplot(plot1, bbox_inches='tight')
-# Set x-axis label
-plt.xlabel('SHAP value (impact on model output)')
-st.write('---')
-
-# # Plot a waterfall chart
-# plot2 = shap.plots.waterfall(shap_values[0])
-# plt.gcf().set_size_inches(6, 3)
-# st.pyplot(plot2, bbox_inches='tight')
-# # st.caption('How does the individual features affect the final price of your listing?')
-# # plt.title('')
