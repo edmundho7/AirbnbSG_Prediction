@@ -1,36 +1,39 @@
 # Capstone Project: Airbnb listings Price prediction and Web application [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_red.svg)](https://edmundho7-airbnbsg-prediction-app-bwyph3.streamlitapp.com/)
 
-## Executive Summary
+## Background
 
-### Problem Statement
+<p align="center">
+<img src = './images/Airbnb_logo.png'>
+</p>
 
 Airbnb is an online marketplace focused on short-term homestays and experience. Its main business model is a shared economy 
 
 The company acts as a broker and charges a commission from each booking.
 
 
+
+### Problem Statement
+
 With the Covid-19 pandemic over and travellers coming back to Singapore, there is an increased demand for short-term accommodation which Airbnb owners can capitalise and rent out their property for revenue.  
 One problem that new Airbnb owners have is on how to optimally price their property to maximise the occupancy and revenue amount. Although Airbnb provide guides on how to price the listings, 
-there are currently no free services where users can generate an estimated pricing based on the features of the property. The usual method that homeowners price their property is to find similar listings around the area and 
-price it to these properties. Onr problem with this pricing method is that the homeowners might miss out on advantages their property have over others such as amenities like private gym or a Hot tub. 
+there are currently no free services where users can generate an estimated pricing based on the features of the property. One method that homeowners can price their property is by pricing it similarly to the listings around the area however
+an issue with this method is that the homeowners might miss out on potential revenue due to their property having unique or better amenities and features. 
 
-For this project, I will create a Web application that generate an estimated pricing when users key in their listing information. To create this application, a price prediction model 
-using various Supervised machine learning regression algorithms will be developed and the performance of the regression model will be assessed by their R2 Score, RMSE and the generalisation of the model.
-The best performing model will be selected as the production model to be used for the web application. Besides providing an estimate for the user, this project also identifies and provide insights on the relationships 
-between the various features and the property price. This can assist host in understanding the features and amenities that are crucial for a higher Airbnb price thereby increasing their earnings.
+To tackle this problem, a web application will be created that generates an estimated pricing when users key in their listing information. In order to create this application, a supervised machine learning regression model 
+will be created and trained on Airbnb dataset to generate predictions of listing prices. The performance of the regression model will be assessed by their R2 Score, RMSE and the generalisation of the model.
+The best performing model will then be used as the production model for the web application. Besides providing an estimate for the user, this project also identifies and provide insights on how the features and amenities can impact the 
+property price therefore providing the host with the crucial information on how they can improve their listings and increase their revenue. 
  
 ## Datasets
-The Airbnb listing dataset that I will be using were sourced from [InsideAirbnb.com](http://insideairbnb.com/get-the-data), a mission driven project that provides data and advocacy about Airbnb's impact on residential communities
-by scraping and reporting data on Airbnb listings.
+The dataset used for this project was sourced from [InsideAirbnb.com](http://insideairbnb.com/get-the-data), a mission driven project that provides data and advocacy about Airbnb's impact on residential communities by scraping and reporting data on Airbnb listings.
 
-The dataset was last scraped on 22 September 2022 and contains information of all the Airbnb listings on the particular day. 
+The dataset was last scraped on 22 September 2022 and contains information of all the Airbnb listings on that particular day. 
 
 The dataset comprises of the following:
 - `Listings`: Detailed listings data of 75 attributes for each of the listings. The data dictionary is shown below for the relevant attributes
 - `Calendar`: Detailed calendar data showing listings availability, dates, prices (adjusted, minimum, maximum)
 - `Reviews`: Detailed reviews for Listings showing reviewer, comments
 - `Neighbourhoods`: GeoJSON file of the different neighbourhoods in Singapore
-
 
 The data dictionary of the dataset can be found [here](https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit#gid=1322284596)
 
