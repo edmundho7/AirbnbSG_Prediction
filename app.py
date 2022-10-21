@@ -81,6 +81,16 @@ html_temp = """
 """
 st.markdown(html_temp, unsafe_allow_html = True)
 st.subheader('Created by Edmund Ho (DSIF 5)')
+
+# Add Linkedin
+st.write(
+"""
+[![](https://img.shields.io/badge/Linkedin-Connect-informational)](https://www.linkedin.com/in/edmundho7/)
+"""
+)
+
+st.write('---')
+
 #st.subheader('Problem Statement')
 st.markdown('''
 At Airbnb, we have noticed that homeowners are often unsure of the price to set for their property. 
