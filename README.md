@@ -61,7 +61,7 @@ Preprocessing & Feature engineering was also performed on the dataset to create 
 An example of feature engineering is that the amenities for each listings were grouped into various categories and specific amenities that are likely to influence listing price were selected to determine their effect on listing price. 
 In general, consumers expect amenities such as TV, Air conditioning and Security lock to be available, prices tend to be lower when owners do not provide these amenities.
 
-** Insert amenities**
+<img src = './images/bar_amenities.png' width='1000'>
 
 Besides the amenities, word count of the listing and description was also performed as Airbnb owners tend to provide renters with important information such as location, amenities and no. of rooms of their listings in their title and description to increase the clickrates and booking of their listings. 
 
@@ -100,9 +100,6 @@ A comparison of the full featured model and the reduced model is shown in the ta
 
 There is a slight drop in the R2 values with an increase in RMSE for the Train and Test data and an increase in generalisation score from 8.67% to 10.87%.
 The model is also only able to explain about 61.5% of the variation in the listing prices with an RMSE price of $91.80 on the test data.
-
-
-** Insert Scatterplot of Full and Production model**
 
 Comparing the full feature and production models, the full feature model perform fairly wells with majority of the predicted scatter points falling close to the diagonal line (representing perfect prediction) 
 for listings below $250 as compared to listings below $120 for the production model. The models also tend to underpredict the prices for listings above $250 and $120 respectively and performed poorly for listings above $300 
@@ -146,6 +143,7 @@ Besides using SHAP to get an overview, we can also use it to understand how each
 The XGBoost model was deployed onto a web app using Streamlit. The app allows users to input their Airbnb features into the app to get a predicted listing price. It shows the map of Singapore, with the location of their listing.
 In addition, it also displays a Waterfall chart showing to users how the model derived the final predicted pricing from the input features and how they increase or decrease the price.
 
+<img src = './images/streamlit-app.gif width='1000'>
 
 ## Conclusion and Recommendations
 
