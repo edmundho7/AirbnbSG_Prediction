@@ -87,8 +87,8 @@ The XGBoost production model will be compared with the original full featured XG
 
 |                   Model | R2 (Train) | R2 (Test) | RMSE (Train) | RMSE (Test) | Generalisation |
 |------------------------:|-----------:|----------:|-------------:|------------:|:--------------:|
-| XGBoost (Full features) |      0.762 |     0.696 |       80.179 |      81.432 | 8.66%          |
-|    XGBoost (Production) |      0.690 |     0.615 |       90.442 |      91.767 | 10.87%         |
+| XGBoost (Full features) |      0.754 |     0.693 |       81.684 |      82.081| 8.09%         |
+|    XGBoost (Production) |      0.669 |     0.611 |       93.024 |      91.817 | 8.67%        |
 
 A comparison table of the models is shown in the table above. 
 
@@ -142,11 +142,12 @@ In addition, it also displays a Waterfall chart showing users how the model deri
 
 ## Conclusion and Recommendations
 
-Price prediction model and app is useful for homeowners to maximise their property occupancies and revenues at the same time. 
-However, more work can be done to improve the production model further to generate a more accurate suggestion
+In this project, XGBoost was selected as the final production model for the Price recommender app due to its much low generalisation score compared to other models. The SHAP plot shows that `accommodates`, `Room type`, `Bathroom type` and `bedrooms` are the top features
+driving the price of an Airbnb listings. For the production model, amenities was not being used as the feature for the models and this can be included in the future which might improve the model performance further. 
 
-Recommendations:
-As the listing price is set by the owner, a more accurate price data such as the actual price paid by the consumers can be used as the target variable
+Recommendations: \
+Use a more accurate price data as the listing price used is set by the owner and not the actual price paid by the consumers
 Improve the dataset by incorporating other features such as property size, unit level and proximity features to F&B and attractions
-Remove hostels from the data as it has a high number of bedrooms/beds and have lower price than other property types, this affects the model performance
+Remove hostels from the data as it has a high number of bedrooms/beds with low listing price, this affects the model performance
+Incorporate the Airbnb amenities as features for the production model and web application
 
