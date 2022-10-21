@@ -143,7 +143,7 @@ Besides using SHAP to get an overview, we can also use it to understand how each
 The XGBoost model was deployed onto a web app using Streamlit. The app allows users to input their Airbnb features into the app to get a predicted listing price. It shows the map of Singapore, with the location of their listing.
 In addition, it also displays a Waterfall chart showing to users how the model derived the final predicted pricing from the input features and how they increase or decrease the price.
 
-<img src = './images/streamlit-app.gif width='1000'>
+<img src = './images/streamlit-app.gif' width='1000'>
 
 ## Conclusion and Recommendations
 
