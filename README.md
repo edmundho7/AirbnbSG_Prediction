@@ -6,23 +6,19 @@
 <img src = './images/Airbnb-logo.jpg'>
 </p>
 
-Airbnb is an online marketplace focused on short-term homestays and experience. Its main business model is a shared economy 
+Airbnb is an online marketplace that connects people who want to rent out their homes with people who are looking for accommodations in specific locales. It offers homeowners an easy, relatively stress-free way to earn some income from their property and guests 
+often find Airbnb is cheaper, has more character, and is homier than hotels. Airbnb makes the bulk of its revenue by charging a service fee for each booking.
 
-The company acts as a broker and charges a commission from each booking.
-
-
-
-### Problem Statement
+### Background and Problem Statement
 
 With the Covid-19 pandemic over and travellers coming back to Singapore, there is an increased demand for short-term accommodation which Airbnb owners can capitalise and rent out their property for revenue.  
 One problem that new Airbnb owners have is on how to optimally price their property to maximise the occupancy and revenue amount. Although Airbnb provide guides on how to price the listings, 
 there are currently no free services where users can generate an estimated pricing based on the features of the property. One method that homeowners can price their property is by pricing it similarly to the listings around the area however
 an issue with this method is that the homeowners might miss out on potential revenue due to their property having unique or better amenities and features. 
 
-To tackle this problem, a web application will be created that generates an estimated pricing when users key in their listing information. In order to create this application, a supervised machine learning regression model 
-will be created and trained on Airbnb dataset to generate predictions of listing prices. The performance of the regression model will be assessed by their R2 Score, RMSE and the generalisation of the model.
-The best performing model will then be used as the production model for the web application. Besides providing an estimate for the user, this project also identifies and provide insights on how the features and amenities can impact the 
-property price therefore providing the host with the crucial information on how they can improve their listings and increase their revenue. 
+To tackle this problem, a web application will be created that generates an estimated pricing when users key in their listing information. In order to create this application, supervised machine learning regression models 
+were trained to predict listing prices. The regression model will be assessed by their R2 Score, RMSE and the generalisation of the model in which the best performing model will be used for the web application. 
+Besides providing an estimate for the user, the project identifies and provide insights on the features and amenities impact on property prices providing information to users on how to improve their listings to increase their revenue. 
  
 ## Datasets
 The dataset used for this project was sourced from [InsideAirbnb.com](http://insideairbnb.com/get-the-data), a mission driven project that provides data and advocacy about Airbnb's impact on residential communities by scraping and reporting data on Airbnb listings.
@@ -58,15 +54,14 @@ As for the features, listing prices generally increases with number of guests an
 
 Preprocessing & Feature engineering was also performed on the dataset to create additional features to be used for supervised machine learning. 
 
-An example of feature engineering is that the amenities for each listings were grouped into various categories and specific amenities that are likely to influence listing price were selected to determine their effect on listing price. 
-In general, consumers expect amenities such as TV, Air conditioning and Security lock to be available, prices tend to be lower when owners do not provide these amenities.
+One feature engineering performed was to group the amenities for the listings into categories and select influential amenities to determine their effect on listing price.
+In general, consumers expect amenities such as TV, Air conditioning and Wifi to be available, prices tend to be lower when owners do not provide these amenities.
 
 <img src = './images/bar_amenities.png' width='1000'>
 
-Besides the amenities, word count of the listing and description was also performed as Airbnb owners tend to provide renters with important information such as location, amenities and no. of rooms of their listings in their title and description to increase the clickrates and booking of their listings. 
+Next, word count of the listing and description was calculated as Airbnb owners tend to provide renters with important information such as location, amenities and no. of rooms of their listings in their title and description to increase the clickrates and booking of their listings. 
 
-
-Similarly to the housing market, proximity to MRT stations and City centre also affects the listing price. Therefore, the distance to the nearest MRT and City centre was calculated via haversine formula.
+Similarly to the housing market, proximity to MRT stations and City centre were calculated via haversine formula.
 
 
 ## Regression model Evaluation/Metrics
@@ -78,7 +73,7 @@ Similarly to the housing market, proximity to MRT stations and City centre also 
 |            Light GBM |      0.958 |     0.767 |       35.306 |      69.126 | 19.94%         |
 |              XGBoost |      0.762 |     0.696 |       80.179 |      81.432 | 8.66%          |
 
-The regression models were evaluated based on the metrics. The metrics are as follows:
+The regression models were evaluated based on the following metrics:
 R2 Score - Higher value indicates how much the model can explain the variance in the listing prices
 RMSE - Average deviation between the predicted and actual price
 Generalisation score - Higher value indicates the model show signs of overfitting to the data and inability to adapt and react to unseen data 
@@ -88,17 +83,16 @@ Therefore XGBoost will be used for the final production model.
 
 ## Production model Evaluation
 
-As XGBoost is selected to be used for the final production model which have a much lesser number of features that are user inputs. The production model will be compared with the original full featured XGBoost model
-to see the performance difference between the two.
+The XGBoost production model will be compared with the original full featured XGBoost model to compare their performance difference.
 
 |                   Model | R2 (Train) | R2 (Test) | RMSE (Train) | RMSE (Test) | Generalisation |
 |------------------------:|-----------:|----------:|-------------:|------------:|:--------------:|
 | XGBoost (Full features) |      0.762 |     0.696 |       80.179 |      81.432 | 8.66%          |
 |    XGBoost (Production) |      0.690 |     0.615 |       90.442 |      91.767 | 10.87%         |
 
-A comparison of the full featured model and the reduced model is shown in the table below. 
+A comparison table of the models is shown in the table above. 
 
-There is a slight drop in the R2 values with an increase in RMSE for the Train and Test data and an increase in generalisation score from 8.67% to 10.87%.
+There is a slight drop in the R2 values and an increase in generalisation score from 8.67% to 10.87%.
 The model is also only able to explain about 61.5% of the variation in the listing prices with an RMSE price of $91.80 on the test data.
 
 Comparing the full feature and production models, the full feature model perform fairly wells with majority of the predicted scatter points falling close to the diagonal line (representing perfect prediction) 
@@ -107,15 +101,16 @@ with the predicted prices being significantly lower than the actual prices.
 
 <img src = './images/scatter_fullmodel.png' width='400'><img src = './images/scatter_usermodel.png' width='400'>
 
-On average, the full feature model is able to predict the listings price within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings price within
-$16.60 of the actual price (or about 13.5%) for 60% of the listings.
+On average, the full feature model predict listings within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings within $16.60 of the actual price (or about 13.5%) for 60% of the listings.
 
 
 ## Feature importance with SHAP
 
-It is not enough to just create a regression model but to also interpret the machine learning model and derive insights on how the various features affect the prediction result of the model. This can be done using SHAP values which was first proposed by Lundberg and Lee as a unified approach to explain the output of any machine learning model.
+It is not enough to just create a regression model but to also interpret the machine learning model and derive insights on the impacts of the features on the model prediction. This can be done using SHAP values which was first proposed by [Lundberg and Lee](https://shap.readthedocs.io/en/latest/index.html) 
+as a unified approach to explain the output of any machine learning model.
+
 The benefits of using SHAP values are that 
-1) Global interpretability - It can be used to summarize the impact of each features on the prediction.
+1) Global interpretability - It can be used to summarize the impact of each features on the overall model.
 2) Local interpretability - It can be used to explain the prediction for a single observation as each observation gets its own SHAP values, allowing us to identify the features that contributed to the prediction.
 3) SHAP values can be calculated for any tree-based models
 
@@ -141,7 +136,7 @@ Besides using SHAP to get an overview, we can also use it to understand how each
 ## Price recommender Web App deployment
 
 The XGBoost model was deployed onto a web app using Streamlit. The app allows users to input their Airbnb features into the app to get a predicted listing price. It shows the map of Singapore, with the location of their listing.
-In addition, it also displays a Waterfall chart showing to users how the model derived the final predicted pricing from the input features and how they increase or decrease the price.
+In addition, it also displays a Waterfall chart showing users how the model derived the final predicted pricing from the input features and how they increase or decrease the price.
 
 <img src = './images/streamlit-app.gif' width='1000'>
 
