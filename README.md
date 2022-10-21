@@ -34,70 +34,23 @@ The dataset comprises of the following:
 
 The data dictionary of the dataset can be found [here](https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit#gid=1322284596)
 
-
-| Field                                        | Type     | Description                                                                                                                                                                             |
-|----------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id                                           | integer  | Airbnb's unique identifier for the listing                                                                                                                                              |
-| name                                         | text     | Name of the listing                                                                                                                                                                     |
-| description                                  | text     | Detailed description of the listing                                                                                                                                                     |
-| host_id                                      | integer  | Airbnb's unique identifier for the host/user                                                                                                                                            |
-| host_name                                    | text     | Name of the host. Usually just the first name(s).                                                                                                                                       |
-| host_response_time                           | text     | average   amount of time the host takes to reply to guest inquiries and booking   requests                                                                                              |
-| host_response_rate                           | text     | proportion   of guest inquiries and booking requests that the host replies to                                                                                                           |
-| host_acceptance_rate                         | text     | That rate at which a host accepts booking requests.                                                                                                                                     |
-| host_is_superhost                            | boolean  | Whether host is superhost                                                                                                                                                               |
-| host_has_profile_pic                         | boolean  | Whether host has profile picture                                                                                                                                                        |
-| host_identity_verified                       | boolean  | Whether host identity is verified                                                                                                                                                       |
-| neighbourhood                                | text     | The neighbourhood of the listing as specified by host                                                                                                                                   |
-| neighbourhood_cleansed                       | text     | The neighbourhood as geocoded using the latitude and longitude against   neighborhoods as defined by open or public digital shapefiles.                                                 |
-| neighbourhood_group_cleansed                 | text     | The neighbourhood group as geocoded using the latitude and longitude   against neighborhoods as defined by open or public digital shapefiles.                                           |
-| latitude                                     | numeric  | Uses the World Geodetic System (WGS84) projection for latitude and   longitude.                                                                                                         |
-| longitude                                    | numeric  | Uses the World Geodetic System (WGS84) projection for latitude and   longitude.                                                                                                         |
-| property_type                                | text     | Self selected property type. Hotels and Bed and Breakfasts are described   as such by their hosts in this field                                                                         |
-| room_type                                    | text     | [Entire home/apt\|Private   room\|Shared room\|Hotel]                                                                                                                                   |
-| accommodates                                 | integer  | The maximum capacity of the listing                                                                                                                                                     |
-| bathrooms                                    | numeric  | The number of bathrooms in the listing                                                                                                                                                  |
-| bathrooms_text                               | string   | The number of bathrooms in the   listing.       On the Airbnb web-site, the bathrooms field has evolved from a number to a   textual description. For older scrapes, bathrooms is used. |
-| bedrooms                                     | integer  | The number of bedrooms                                                                                                                                                                  |
-| beds                                         | integer  | The number of bed(s)                                                                                                                                                                    |
-| amenities                                    | json     | Amenities available in the listing                                                                                                                                                      |
-| price                                        | currency | Daily price in local currency                                                                                                                                                           |
-| availability_30                              | integer  | Number of nights available to be booked in the next 30 days                                                                                                                             |
-| availability_60                              | integer  | Number of nights available to be booked in the next 60 days                                                                                                                             |
-| availability_90                              | integer  | Number of nights available to be booked in the next 90 days                                                                                                                             |
-| availability_365                             | integer  | Number of nights available to be booked in the next 365 days                                                                                                                            |
-| number_of_reviews                            | integer  | The number of reviews the listing has                                                                                                                                                   |
-| review_scores_rating                         | float    | Average overall review rating scores                                                                                                                                                    |
-| review_scores_accuracy                       | float    | Average rating scores for listing description accuracy                                                                                                                                  |
-| review_scores_cleanliness                    | float    | Average rating scores for property cleanliness                                                                                                                                          |
-| review_scores_checkin                        | float    | Average rating scores for guests' check-in process                                                                                                                                      |
-| review_scores_communication                  | float    | Average rating scores for host's communication                                                                                                                                          |
-| review_scores_location                       | float    | Average rating scores for listing location                                                                                                                                              |
-| review_scores_value                          | float    | Average rating scores for value-for-money consideration                                                                                                                                 |
-| instant_bookable                             | boolean  | Whether or not the property can be instant booked, without having to   message the host first and wait to be accepted                                                                   |
-| calculated_host_listings_count               | integer  | The number of listings the host has in the current scrape, in the   city/region geography.                                                                                              |
-| calculated_host_listings_count_entire_homes  | integer  | The number of Entire home/apt listings the host has in the current   scrape, in the city/region geography                                                                               |
-| calculated_host_listings_count_private_rooms | integer  | The number of Private room listings the host has in the current scrape,   in the city/region geography                                                                                  |
-| calculated_host_listings_count_shared_rooms  | integer  | The number of Shared room listings the host has in the current scrape, in   the city/region geography                                                                                   |
-| reviews_per_month                            | numeric  | The number of reviews the listing has over the lifetime of the listing                                                                                                                  |
-
-
-
-
-
 ##	Exploratory Data Analysis
 
 <img src = './images/waffle_property.png' width='1000'>
 
+<img src = './images/box_neighbourhood.png' width='1000'>
+
 The Airbnb listings in Singapore are made up of 80% apartment, 16% of Hotel and House which contribute a small 4% of the total listings. The apartment listings are scattered throughout the island while the hotels are centered around the CBD area and Southern Waterfront area.
 
+ <img src = './images/map_scatterlistings.png' width='1000'>
  
-The listings in Marina South fetch the highest price among the neighbourhoods at about $600 per night 
+ The listings in Marina South fetch the highest price among the neighbourhoods at about $600 per night 
 while most listings are about $150-$200 per night. 
 
 As for the features, listing prices generally increases with number of guests and beds, and having a sharp drop when accommodation capacity exceed 9 pax. This is due to the fact that those listings are hostels with high capacity and low prices.
 
 <img src = './images/bar_accommodates.png' width='800'>
+<img src = './images/bar_beds.png' width='800'>
 
 
 ## Preprocessing & Feature Engineering
@@ -116,12 +69,13 @@ Similarly to the housing market, proximity to MRT stations and City centre also 
 
 
 ## Regression model Evaluation/Metrics
-|   Model |   R2 (Train) |   R2 (Test) |   RMSE (Train) |   RMSE (Test) |   Generalisation |
-|--------------:|--------------:|-------------:|-----------------:|-----------:|
-|K-Nearest Neighbours|         1.0|        0.678 |            0.0 |      76.074 |       32.20%    |
-|Random Forest|         0.897 |        0.723 |            52.944 |      74.553 |       19.40%     |
-|Light GBM|         0.958 |        0.767 |            35.306 |      69.126 |       19.94%     |
-|XGBoost|         0.762 |        0.696 |            80.179 |      81.432 |       8.66%     |
+
+|                Model | R2 (Train) | R2 (Test) | RMSE (Train) | RMSE (Test) | Generalisation |
+|---------------------:|-----------:|----------:|-------------:|------------:|:--------------:|
+| K-Nearest Neighbours |        1.0 |     0.678 |          0.0 |      76.074 | 32.20%         |
+|        Random Forest |      0.897 |     0.723 |       52.944 |      74.553 | 19.40%         |
+|            Light GBM |      0.958 |     0.767 |       35.306 |      69.126 | 19.94%         |
+|              XGBoost |      0.762 |     0.696 |       80.179 |      81.432 | 8.66%          |
 
 The regression models were evaluated based on the metrics. The metrics are as follows:
 R2 Score - Higher value indicates how much the model can explain the variance in the listing prices
@@ -136,11 +90,11 @@ Therefore XGBoost will be used for the final production model.
 As XGBoost is selected to be used for the final production model which have a much lesser number of features that are user inputs. The production model will be compared with the original full featured XGBoost model
 to see the performance difference between the two.
 
-|   Model |   R2 (Train) |   R2 (Test) |   RMSE (Train) |   RMSE (Test) |   Generalisation |
-|--------------:|--------------:|-------------:|-----------------:|-----------:|
-|XGBoost (Full features)|         0.762 |        0.696 |            80.179 |      81.432 |       8.66%     |
-|XGBoost (Production)|         0.690 |        0.615 |            90.442 |      91.767 |       10.87%     |
- 
+|                   Model | R2 (Train) | R2 (Test) | RMSE (Train) | RMSE (Test) | Generalisation |
+|------------------------:|-----------:|----------:|-------------:|------------:|:--------------:|
+| XGBoost (Full features) |      0.762 |     0.696 |       80.179 |      81.432 | 8.66%          |
+|    XGBoost (Production) |      0.690 |     0.615 |       90.442 |      91.767 | 10.87%         |
+
 A comparison of the full featured model and the reduced model is shown in the table below. 
 
 There is a slight drop in the R2 values with an increase in RMSE for the Train and Test data and an increase in generalisation score from 8.67% to 10.87%.
@@ -152,6 +106,8 @@ The model is also only able to explain about 61.5% of the variation in the listi
 Comparing the full feature and production models, the full feature model perform fairly wells with majority of the predicted scatter points falling close to the diagonal line (representing perfect prediction) 
 for listings below $250 as compared to listings below $120 for the production model. The models also tend to underpredict the prices for listings above $250 and $120 respectively and performed poorly for listings above $300 
 with the predicted prices being significantly lower than the actual prices.
+
+
 
 On average, the full feature model is able to predict the listings price within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings price within
 $16.60 of the actual price (or about 13.5%) for 60% of the listings.
@@ -167,8 +123,7 @@ The benefits of using SHAP values are that
 
 To get an overview of which features are important for the model, we can plot a bar plot of the SHAP values for the features in descending order to determine the importance of the features.
 
-** Insert bar plot**
-
+<img src = './images/shap_vip.png' width='800'>
 
 Besides using SHAP to get an overview, we can also use it to understand how each features impact the predicted price of each listing by creating a waterfall plot to show how the model derived the final pricing based on the various features.
 
@@ -179,7 +134,7 @@ Besides using SHAP to get an overview, we can also use it to understand how each
 **Width of bars**: Importance of the feature. The wider it is, the higher impact is has on the price \
 **Values**: The logarithmn value of the features, base inputs and output. To get the value ofhow much the feature affect the price of the listing in $, take the exponential of the value
 
-** Insert waterfall plot**
+<img src = './images/shap_waterfall1.png' width='800'>
 
 ## Price recommender Web App deployment
 
