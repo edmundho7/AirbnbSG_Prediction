@@ -52,7 +52,7 @@ while most listings are about $150-$200 per night.
 
 As for the features, listing prices generally increases with number of guests and beds, and having a sharp drop when accommodation capacity exceed 9 pax. This is due to the fact that those listings are hostels with high capacity and low prices.
 
-<img src = './images/bar_accommodates.png' width='500'><img src = './images/bar_beds.png' width='500'>
+<img src = './images/bar_accommodates.png' width='400'><img src = './images/bar_beds.png' width='400'>
 
 ## Preprocessing & Feature Engineering
 
@@ -108,7 +108,7 @@ Comparing the full feature and production models, the full feature model perform
 for listings below $250 as compared to listings below $120 for the production model. The models also tend to underpredict the prices for listings above $250 and $120 respectively and performed poorly for listings above $300 
 with the predicted prices being significantly lower than the actual prices.
 
-<img src = './images/scatter_fullmodel.png' width='500'><img src = './images/scatter_usermodel.png' width='500'>
+<img src = './images/scatter_fullmodel.png' width='400'><img src = './images/scatter_usermodel.png' width='400'>
 
 On average, the full feature model is able to predict the listings price within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings price within
 $16.60 of the actual price (or about 13.5%) for 60% of the listings.
