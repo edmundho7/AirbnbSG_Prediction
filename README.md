@@ -52,9 +52,7 @@ while most listings are about $150-$200 per night.
 
 As for the features, listing prices generally increases with number of guests and beds, and having a sharp drop when accommodation capacity exceed 9 pax. This is due to the fact that those listings are hostels with high capacity and low prices.
 
-<img src = './images/bar_accommodates.png' width='800'>
-<img src = './images/bar_beds.png' width='800'>
-
+<img src = './images/bar_accommodates.png' width='500'><img src = './images/bar_beds.png' width='500'>
 
 ## Preprocessing & Feature Engineering
 
@@ -110,7 +108,7 @@ Comparing the full feature and production models, the full feature model perform
 for listings below $250 as compared to listings below $120 for the production model. The models also tend to underpredict the prices for listings above $250 and $120 respectively and performed poorly for listings above $300 
 with the predicted prices being significantly lower than the actual prices.
 
-
+<img src = './images/scatter_fullmodel.png' width='500'><img src = './images/scatter_usermodel.png' width='500'>
 
 On average, the full feature model is able to predict the listings price within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings price within
 $16.60 of the actual price (or about 13.5%) for 60% of the listings.
@@ -124,9 +122,13 @@ The benefits of using SHAP values are that
 2) Local interpretability - It can be used to explain the prediction for a single observation as each observation gets its own SHAP values, allowing us to identify the features that contributed to the prediction.
 3) SHAP values can be calculated for any tree-based models
 
+**Global interpretability**
+
 To get an overview of which features are important for the model, we can plot a bar plot of the SHAP values for the features in descending order to determine the importance of the features.
 
 <img src = './images/shap_vip.png' width='800'>
+
+**Local interpretability**
 
 Besides using SHAP to get an overview, we can also use it to understand how each features impact the predicted price of each listing by creating a waterfall plot to show how the model derived the final pricing based on the various features.
 
@@ -137,7 +139,7 @@ Besides using SHAP to get an overview, we can also use it to understand how each
 **Width of bars**: Importance of the feature. The wider it is, the higher impact is has on the price \
 **Values**: The logarithmn value of the features, base inputs and output. To get the value ofhow much the feature affect the price of the listing in $, take the exponential of the value
 
-<img src = './images/shap_waterfall1.png' width='800'>
+<img src = './images/shapwaterfall_1.png' width='800'>
 
 ## Price recommender Web App deployment
 
