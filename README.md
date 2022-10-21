@@ -146,8 +146,8 @@ In this project, XGBoost was selected as the final production model for the Pric
 driving the price of an Airbnb listings. For the production model, amenities was not being used as the feature for the models and this can be included in the future which might improve the model performance further. 
 
 Recommendations: \
-Use a more accurate price data as the listing price used is set by the owner and not the actual price paid by the consumers
-Improve the dataset by incorporating other features such as property size, unit level and proximity features to F&B and attractions
-Remove hostels from the data as it has a high number of bedrooms/beds with low listing price, this affects the model performance
-Incorporate the Airbnb amenities as features for the production model and web application
+Use a more accurate price data as the listing price used is set by the owner and not the actual price paid by the consumers \
+Improve the dataset by incorporating other features such as property size, unit level and proximity features to F&B and attractions \
+Remove hostels from the data as it has a high number of bedrooms/beds with low listing price, this affects the model performance \
+Incorporate the Airbnb amenities as features for the production model and web application \
 
