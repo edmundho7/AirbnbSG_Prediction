@@ -145,9 +145,9 @@ In addition, it also displays a Waterfall chart showing users how the model deri
 In this project, XGBoost was selected as the final production model for the Price recommender app due to its much low generalisation score compared to other models. The SHAP plot shows that `accommodates`, `Room type`, `Bathroom type` and `bedrooms` are the top features
 driving the price of an Airbnb listings. For the production model, amenities was not being used as the feature for the models and this can be included in the future which might improve the model performance further. 
 
-Recommendations: \
+**Recommendations**: \
 Use a more accurate price data as the listing price used is set by the owner and not the actual price paid by the consumers \
 Improve the dataset by incorporating other features such as property size, unit level and proximity features to F&B and attractions \
 Remove hostels from the data as it has a high number of bedrooms/beds with low listing price, this affects the model performance \
-Incorporate the Airbnb amenities as features for the production model and web application \
+Incorporate the Airbnb amenities as features for the production model and web application 
 
