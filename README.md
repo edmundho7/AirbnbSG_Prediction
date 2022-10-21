@@ -20,7 +20,7 @@ The best performing model will be selected as the production model to be used fo
 between the various features and the property price. This can assist host in understanding the features and amenities that are crucial for a higher Airbnb price thereby increasing their earnings.
  
 ## Datasets
-The Airbnb listing dataset that I will be using were sourced from InsideAirbnb.com (http://insideairbnb.com/get-the-data), a mission driven project that provides data and advocacy about Airbnb's impact on residential communities
+The Airbnb listing dataset that I will be using were sourced from [InsideAirbnb.com](http://insideairbnb.com/get-the-data), a mission driven project that provides data and advocacy about Airbnb's impact on residential communities
 by scraping and reporting data on Airbnb listings.
 
 The dataset was last scraped on 22 September 2022 and contains information of all the Airbnb listings on the particular day. 
@@ -30,6 +30,10 @@ The dataset comprises of the following:
 - `Calendar`: Detailed calendar data showing listings availability, dates, prices (adjusted, minimum, maximum)
 - `Reviews`: Detailed reviews for Listings showing reviewer, comments
 - `Neighbourhoods`: GeoJSON file of the different neighbourhoods in Singapore
+
+
+The data dictionary of the dataset can be found [here](https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit#gid=1322284596)
+
 
 | Field                                        | Type     | Description                                                                                                                                                                             |
 |----------------------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -81,48 +85,115 @@ The dataset comprises of the following:
 
 
 
-##	Data Imbalance
+##	Exploratory Data Analysis
 
-As the given data is heavily imbalanced, with 95% of the data indicated as negative WNV, resulting in poor performance from predicting the positive WNV cases.  
-In order to address the issue of data imbalance, an over-sampling method called SMOTE (Synthetic Minority Oversampling Technique) is adopted for all the classifier models. As such, AUC score will be the main metrics used to assess the best model as compared accuracy.
+<img src = './images/waffle_property.png' width='1000'>
 
-## Model Evaluation/Metrics
-|   Model |   Train score |   Test score |   Generalisation |   Accuracy |   Precision |   Recall |   Specificity |      F1 |   ROC AUC |
-|--------------:|--------------:|-------------:|-----------------:|-----------:|------------:|---------:|--------------:|--------:|----------:|
-|Logistic Regression (no SMOTE|         0.947 |        0.946 |            0.106 |      0.946 |       0.5     |    0.015     |         0.999 | 0.029     |    0.8203 |
-|Logistic Regression|         0.957 |        0.928 |            3.030  |      0.928 |       0.253 |    0.182 |         0.970  |   0.212 |    0.7949 |
-|Random Forest Classification|         0.951 |        0.866 |           8.938 |      0.866 |       0.171 |    0.394 |         0.892 |   0.238 |    0.8208 |
-|Decision Tree Classification|         0.985 |        0.878 |           10.863 |      0.878 |       0.142 |    0.255 |         0.913 |   0.182  |    0.5997 |
-|Multinomial Naive Bayes Classification|         0.834 |        0.785 |            5.875 |      0.785 |       0.152 |    0.664          |0.791 |   0.247 |    0.8181 |
-|k-Nearest Neighbour Classification|         0.901 |        0.638 |           29.190 |      0.638 |       0.088 |    0.613 |         0.640 |   0.154 |    0.6813  |
-|AdaBoost Classification|        0.960 |        0.913 |            4.167 |      0.913 |       0.224 |    0.241 |         0.950 |   0.242 |    0.8328 |
-|XGBoost Classification|         0.969 |        0.889 |            8.256 |      0.889 |       0.187 |    0.321 |         0.921 |   0.236 |    0.8319 |
-|Gradient Boosting Classification|         0.981 |        0.915 |            6.728 |      0.915 |       0.199 |    0.197 |         0.955 |   0.198 |    0.8000 |
+The Airbnb listings in Singapore are made up of 80% apartment, 16% of Hotel and House which contribute a small 4% of the total listings. The apartment listings are scattered throughout the island while the hotels are centered around the CBD area and Southern Waterfront area.
 
-Classification models, unlike regression models have multiple metrics which results may be based on. Accuracy is used when the True Positives and True negatives are more important while F1-score is used when the False Negatives and False Positives are crucial. F1 score is usually handy for imbalanced datasets (as its calculated based on Precision and Recall). Lastly, for the area under curve of a ROC curve, it measures the usefulness of a test in general, where a greater area means a more useful test, the areas under ROC curves are used to compare the usefulness of tests. AUC metric measure performance for the classification problem at various threshold settings.
+ 
+The listings in Marina South fetch the highest price among the neighbourhoods at about $600 per night 
+while most listings are about $150-$200 per night. 
 
-For the purpose of solving our problem statement, we will be considering the following criterias to select the best performing model:
+As for the features, listing prices generally increases with number of guests and beds, and having a sharp drop when accommodation capacity exceed 9 pax. This is due to the fact that those listings are hostels with high capacity and low prices.
 
-1. ROC AUC score > 0.8 
-2. Generalisation < 5% 
-3. F1 score 
-
-<br>Based on the above criterias, we have selected AdaBoost+SMOTE. 
-
-- **ROC AUC** of 0.8328 infers that the model has a good capability of classifying the positive class in the dataset.
-- **Generalisation Score** of 4.167% means that the model has the ability to properly adapt to new, previously unseen data, drawn from the same distribution as the one used to create the model.
-- **Recall** of 0.241. The high recall score means our modell succeeds well in finding all the positive cases in the data, even though it may also wrongly identify some negative cases as positive cases.
-- **F1 score** of 0.242. As F1 Score is an average of Precision and Recall, it means that the F1 score gives equal weight to Precision and Recall. All the models does not have a great F1 Score. However, our model has a good balance of both Precision and Recall. 
-
-## Conclusion 
-Using ADABoost (our best performing model), we achieved an ROC_AUC score of  0.8328 and F1 score of 0.242. Feature importance of our model showed that location features (Latitude & Longitude) as well as weather features (DewPoint, ResultDir, Temperature & SunHours) ranked the highest. This indicates that WNV is most likely to occur at given locations and under certain weather conditions. Our interpretation for these features to score high could be attributed to denser locations which gives the mosquitoes more opportunities for breeding as well as seasonal cycles where temperatures are ideal for the Culex species to thrive such as Summer. Therefore spray efforts should be concentrated at these locations when weather conditions are right.
+<img src = './images/bar_accommodates.png' width='800'>
 
 
-## Recommendations
-1. Through our cost-benefit analysis, the projected cost of spraying would be financially justified as long as it prevents more than 64 individuals from being hospitalized due to the West Nile Virus.
+## Preprocessing & Feature Engineering
 
-2. Though our costing assumptions are completely straightforward, we believe that there are other more cost-effective techniques that may be applied in conjunction to spraying such as creating awareness amongst the community. These initiatives may be performed through campaigns, education programs and home visits/checks.
+Preprocessing & Feature engineering was also performed on the dataset to create additional features to be used for supervised machine learning. 
 
-3. Explore further in detail on deploying targeted spray areas from our model predictions. This will in turn help directly reduce the cost of spraying efforts across Chicago (such as the random spray cluster at High Ridge Knolls Park). However, as the current spray datasets does not substantially quantify the spraying efforts, more evidence (from a better designed and documented spraying regime) would be recommended.
+An example of feature engineering is that the amenities for each listings were grouped into various categories and specific amenities that are likely to influence listing price were selected to determine their effect on listing price. 
+In general, consumers expect amenities such as TV, Air conditioning and Security lock to be available, prices tend to be lower when owners do not provide these amenities.
 
+** Insert amenities**
+
+Besides the amenities, word count of the listing and description was also performed as Airbnb owners tend to provide renters with important information such as location, amenities and no. of rooms of their listings in their title and description to increase the clickrates and booking of their listings. 
+
+
+Similarly to the housing market, proximity to MRT stations and City centre also affects the listing price. Therefore, the distance to the nearest MRT and City centre was calculated via haversine formula.
+
+
+## Regression model Evaluation/Metrics
+|   Model |   R2 (Train) |   R2 (Test) |   RMSE (Train) |   RMSE (Test) |   Generalisation |
+|--------------:|--------------:|-------------:|-----------------:|-----------:|
+|K-Nearest Neighbours|         1.0|        0.678 |            0.0 |      76.074 |       32.20%    |
+|Random Forest|         0.897 |        0.723 |            52.944 |      74.553 |       19.40%     |
+|Light GBM|         0.958 |        0.767 |            35.306 |      69.126 |       19.94%     |
+|XGBoost|         0.762 |        0.696 |            80.179 |      81.432 |       8.66%     |
+
+The regression models were evaluated based on the metrics. The metrics are as follows:
+R2 Score - Higher value indicates how much the model can explain the variance in the listing prices
+RMSE - Average deviation between the predicted and actual price
+Generalisation score - Higher value indicates the model show signs of overfitting to the data and inability to adapt and react to unseen data 
+
+Based on the above criteria, XGBoost was selected as the best performing model due to its much lower generalisation score compared to the other models. 
+Therefore XGBoost will be used for the final production model. 
+
+## Production model Evaluation
+
+As XGBoost is selected to be used for the final production model which have a much lesser number of features that are user inputs. The production model will be compared with the original full featured XGBoost model
+to see the performance difference between the two.
+
+|   Model |   R2 (Train) |   R2 (Test) |   RMSE (Train) |   RMSE (Test) |   Generalisation |
+|--------------:|--------------:|-------------:|-----------------:|-----------:|
+|XGBoost (Full features)|         0.762 |        0.696 |            80.179 |      81.432 |       8.66%     |
+|XGBoost (Production)|         0.690 |        0.615 |            90.442 |      91.767 |       10.87%     |
+ 
+A comparison of the full featured model and the reduced model is shown in the table below. 
+
+There is a slight drop in the R2 values with an increase in RMSE for the Train and Test data and an increase in generalisation score from 8.67% to 10.87%.
+The model is also only able to explain about 61.5% of the variation in the listing prices with an RMSE price of $91.80 on the test data.
+
+
+** Insert Scatterplot of Full and Production model**
+
+Comparing the full feature and production models, the full feature model perform fairly wells with majority of the predicted scatter points falling close to the diagonal line (representing perfect prediction) 
+for listings below $250 as compared to listings below $120 for the production model. The models also tend to underpredict the prices for listings above $250 and $120 respectively and performed poorly for listings above $300 
+with the predicted prices being significantly lower than the actual prices.
+
+On average, the full feature model is able to predict the listings price within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings price within
+$16.60 of the actual price (or about 13.5%) for 60% of the listings.
+
+
+## Feature importance with SHAP
+
+It is not enough to just create a regression model but to also interpret the machine learning model and derive insights on how the various features affect the prediction result of the model. This can be done using SHAP values which was first proposed by Lundberg and Lee as a unified approach to explain the output of any machine learning model.
+The benefits of using SHAP values are that 
+1) Global interpretability - It can be used to summarize the impact of each features on the prediction.
+2) Local interpretability - It can be used to explain the prediction for a single observation as each observation gets its own SHAP values, allowing us to identify the features that contributed to the prediction.
+3) SHAP values can be calculated for any tree-based models
+
+To get an overview of which features are important for the model, we can plot a bar plot of the SHAP values for the features in descending order to determine the importance of the features.
+
+** Insert bar plot**
+
+
+Besides using SHAP to get an overview, we can also use it to understand how each features impact the predicted price of each listing by creating a waterfall plot to show how the model derived the final pricing based on the various features.
+
+**E[f(x)]**: is the output value of the model's prediction for the given input. \
+ **f(x)**: is the base value for the given input. It is the price that will be predicted if we did not know any features for the current output. \
+**Red bars**: Features that push the listing price ***higher*** \
+**Blue bars**: Features that pull the listing price ***lower*** \
+**Width of bars**: Importance of the feature. The wider it is, the higher impact is has on the price \
+**Values**: The logarithmn value of the features, base inputs and output. To get the value ofhow much the feature affect the price of the listing in $, take the exponential of the value
+
+** Insert waterfall plot**
+
+## Price recommender Web App deployment
+
+The XGBoost model was deployed onto a web app using Streamlit. The app allows users to input their Airbnb features into the app to get a predicted listing price. It shows the map of Singapore, with the location of their listing.
+In addition, it also displays a Waterfall chart showing to users how the model derived the final predicted pricing from the input features and how they increase or decrease the price.
+
+
+## Conclusion and Recommendations
+
+Price prediction model and app is useful for homeowners to maximise their property occupancies and revenues at the same time. 
+However, more work can be done to improve the production model further to generate a more accurate suggestion
+
+Recommendations:
+As the listing price is set by the owner, a more accurate price data such as the actual price paid by the consumers can be used as the target variable
+Improve the dataset by incorporating other features such as property size, unit level and proximity features to F&B and attractions
+Remove hostels from the data as it has a high number of bedrooms/beds and have lower price than other property types, this affects the model performance
 
