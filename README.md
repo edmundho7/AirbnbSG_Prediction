@@ -3,7 +3,7 @@
 ## Background
 
 <p align="center">
-<img src = './images/Airbnb_logo.png'>
+<img src = './images/Airbnb-logo.jpg'>
 </p>
 
 Airbnb is an online marketplace focused on short-term homestays and experience. Its main business model is a shared economy 
