@@ -1,4 +1,4 @@
-# Capstone Project: Airbnb listings Price prediction and Web application [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_red.svg)](https://edmundho7-airbnbsg-prediction-app-bwyph3.streamlitapp.com/)
+# Airbnb price recommender and Web application for Homeowners [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_red.svg)](https://edmundho7-airbnbsg-prediction-app-bwyph3.streamlitapp.com/)
 
 ## Background
 
