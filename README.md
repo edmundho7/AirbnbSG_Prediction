@@ -68,10 +68,10 @@ Similarly to the housing market, proximity to MRT stations and City centre were 
 
 |                Model | R2 (Train) | R2 (Test) | RMSE (Train) | RMSE (Test) | Generalisation |
 |---------------------:|-----------:|----------:|-------------:|------------:|:--------------:|
-| K-Nearest Neighbours |        1.0 |     0.678 |          0.0 |      76.074 | 32.20%         |
-|        Random Forest |      0.897 |     0.723 |       52.944 |      74.553 | 19.40%         |
-|            Light GBM |      0.958 |     0.767 |       35.306 |      69.126 | 19.94%         |
-|              XGBoost |      0.762 |     0.696 |       80.179 |      81.432 | 8.66%          |
+| K-Nearest Neighbours |        1.0 |     0.522 |          0.0 |      95.0433 | 47.8%        |
+|        Random Forest |      0.904 |     0.723 |       51.656 |      74.9624 | 20.022%        |
+|            Light GBM |      0.957 |     0.772 |       35.704 |      70.1361 | 19.331%         |
+|              XGBoost |      0.754 |     0.693 |       81.684 |      82.081 | 8.09%         |
 
 The regression models were evaluated based on the following metrics:
 R2 Score - Higher value indicates how much the model can explain the variance in the listing prices
