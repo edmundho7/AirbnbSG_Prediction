@@ -99,7 +99,7 @@ Comparing the full feature and production models, the full feature model perform
 for listings below $250 as compared to listings below $120 for the production model. The models also tend to underpredict the prices for listings above $250 and $120 respectively and performed poorly for listings above $300 
 with the predicted prices being significantly lower than the actual prices.
 
-<img src = './images/scatter_fullmodel.png' width='400'><img src = './images/scatter_usermodel.png' width='400'>
+<img src = './images/scatter_full_user.png' width='800'>
 
 On average, the full feature model predict listings within $14.8 of the actual price (or about 11.4%) for 70% of the listings while the production model is only able to predict listings within $16.60 of the actual price (or about 13.5%) for 60% of the listings.
 
