@@ -33,6 +33,16 @@ The dataset comprises of the following:
 
 The data dictionary of the dataset can be found [here](https://docs.google.com/spreadsheets/d/1iWCNJcSutYqpULSQHlNyGInUvHg2BoUGoNRIGa6Szc4/edit#gid=1322284596)
 
+## Methodology
+
+The project was done in 5 separate notebooks.
+
+1) Data Cleaning & EDA - Data cleaning and exploratory data analysis (For both full feature model and production model)
+2) Preprocessing & Feature Engineering (Full feature model) - Preprocessing and feature engineering for full feature dataset
+3) Modelling (Full feature model) - Modelling, results evaluation and model interpretability using SHAP for full feature model  
+4) Preprocessing & Feature Engineering (Production model) - Preprocessing and feature engineering for production dataset
+5) Modelling (Production model) - Modelling, results evaluation and model interpretability using SHAP for production model 
+
 ##	Exploratory Data Analysis
 
 <img src = './images/waffle_property.png' width='1000'>
